@@ -24,13 +24,6 @@ class SequelizeAdapter {
         } catch (error) {
             console.error("Unable to connect to the PostgreSQL database:", error);
         }
-
-        // try {
-        //     await this.instance.sync({ force: forceSync });
-        //     // console.log("Sync all defined models to the DB.");
-        // } catch (error) {
-        //     // console.log("Unable to sync models on DB: ", error);
-        // }
     }
 }
 

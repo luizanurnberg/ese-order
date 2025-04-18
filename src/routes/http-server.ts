@@ -14,7 +14,6 @@ class ExpressServerAdapter {
 
     constructor() {
         const expressInstace = express();
-
         this.expressServer = expressInstace;
     }
 
@@ -26,9 +25,7 @@ class ExpressServerAdapter {
 
     runHttpServer() {
         const HTTP_PORT = process.env.APP_PORT;
-
         this.registerMiddlewares();
-
         this.expressServer.listen(HTTP_PORT, () => {
             console.log(`ExpressHttpServer app listening on port ${HTTP_PORT}`);
         });
