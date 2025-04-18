@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import cors from "cors";
+import router from "./routes";
 
 const corsOptions = {
     origin: "*",
@@ -20,7 +21,7 @@ class ExpressServerAdapter {
     registerMiddlewares() {
         this.expressServer.use(cors(corsOptions));
         this.expressServer.use(express.json());
-        //this.expressServer.use(router);
+        this.expressServer.use(router);
     }
 
     runHttpServer() {

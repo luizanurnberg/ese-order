@@ -12,3 +12,7 @@ Repository for the Service-Oriented Software Engineering course
 | `docker-compose build`     | Só faz o rebuild das imagens, sem subir.                   |
 | `docker-compose ps`        | Mostra o status dos containers da sua stack.               |
 | `docker-compose logs -f`   | Acompanha os logs de todos os serviços em tempo real.      |
+
+
+sudo lsof -i :5432 - para encontrar o PID que está usando a porta
+sudo kill -9 <PID>
