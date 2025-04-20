@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
-import createQuotationWithAddressesUsecase, {
-    TCreateQuotationWithAddresses,
-} from "../../services/quotation/create-quotation";
+import quotationService from "../../services/quotation/quotation.service";
 import quotationRepository from "../../repositories/quotation/quotation.repository";
+import { TCreateQuotationWithAddresses } from "../../models/quotation/interfaces/Quotation.model";
 
 async function createWithAddresses(req: Request<{}, {}, TCreateQuotationWithAddresses>, res: Response): Promise<void> {
     /*
@@ -20,7 +19,7 @@ async function createWithAddresses(req: Request<{}, {}, TCreateQuotationWithAddr
     */
     try {
         const requestBody = req.body;
-        const result = await createQuotationWithAddressesUsecase(requestBody);
+        const result = await quotationService.createQuotationWithAddressesUsecase(requestBody);
         res.status(201).send(result);
     } catch (ex) {
         console.log({ ex });
@@ -43,7 +42,7 @@ async function findAll(req: Request, res: Response): Promise<void> {
     }
     */
     try {
-        const findAllResult = await quotationRepository.findAll();
+        const findAllResult = await quotationService.findAll();
         res.status(200).send(findAllResult);
     } catch (error) {
         console.log({ error });
@@ -66,7 +65,7 @@ async function findAllWithoutApprovedOffers(req: Request, res: Response): Promis
     }
     */
     try {
-        const findAllResult = await quotationRepository.findAllWithoutApprovedOffers();
+        const findAllResult = await quotationService.findAllWithoutApprovedOffers();
         res.status(200).send(findAllResult);
     } catch (error) {
         console.log({ error });
@@ -90,7 +89,7 @@ async function findAllByCPF(req: Request, res: Response): Promise<void> {
     */
     try {
         const idToFind = req.params.cpf;
-        const findAllResult = await quotationRepository.findAllByCPF({ cpf: idToFind });
+        const findAllResult = await quotationService.findAllByCPF(idToFind);
         if (!findAllResult.length) {
             res.status(400).send("Erro");
             return;
@@ -118,7 +117,7 @@ async function findOne(req: Request, res: Response): Promise<void> {
     */
     const idToFind = req.params.id;
     try {
-        const findOneResult = await quotationRepository.findOne({ id: idToFind });
+        const findOneResult = await quotationService.findOne(idToFind);
         res.status(200).send(findOneResult);
     } catch (error) {
         console.log({ error });
@@ -142,7 +141,7 @@ async function create(req: Request, res: Response): Promise<void> {
     */
     try {
         const body = req.body;
-        const createResult = await quotationRepository.create({ data: body });
+        const createResult = await quotationService.create(body);
         res.status(201).send(createResult);
     } catch (error) {
         console.log({ error });
@@ -166,7 +165,7 @@ async function update(req: Request, res: Response): Promise<void> {
     */
     try {
         const body = req.body;
-        const updateReturn = await quotationRepository.update({ data: body });
+        const updateReturn = await quotationService.update(body);
         res.status(204).send(updateReturn);
     } catch (error) {
         console.log({ error });
@@ -190,7 +189,7 @@ async function deleteOne(req: Request, res: Response): Promise<void> {
     */
     try {
         const idToFind = req.params.id;
-        const deleteReturn = await quotationRepository.delete({ id: idToFind });
+        const deleteReturn = await quotationService.deleteOne(idToFind);
 
         if (deleteReturn) {
             res.status(204).send("");

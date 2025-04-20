@@ -1,5 +1,5 @@
 import IBaseRepository from "../base.repository";
-import TQuotationModel from "../../models/quotation/interfaces/Quotation.model";
+import { TQuotationModel } from "../../models/quotation/interfaces/Quotation.model";
 import Quotation from "../../models/quotation/Quotation";
 import Address from "../../models/address/Address";
 import ItemRemittance from "../../models/item-remittance/ItemRemittance";
@@ -14,7 +14,6 @@ const TQuotationSchema = z.object({
     originAddressId: z.number(),
     destinationAddressId: z.number(),
 });
-
 
 class QuotationRepository implements IBaseRepository<TQuotationModel> {
     async findAll(): Promise<TQuotationModel[]> {

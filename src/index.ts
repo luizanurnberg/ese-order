@@ -5,5 +5,4 @@ async function start() {
     db.connectDataBase();
     http.runHttpServer();
 }
-
 start();

@@ -8,7 +8,7 @@ import {
     HasMany,
 } from "sequelize-typescript";
 import Address from "../address/Address";
-import TQuotationModel from "../quotation/interfaces/Quotation.model";
+import { TQuotationModel } from "../quotation/interfaces/Quotation.model";
 import ItemRemittance from "../item-remittance/ItemRemittance";
 import Offer from "../offer/Offer";
 

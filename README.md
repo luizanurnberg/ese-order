@@ -16,3 +16,11 @@ Repository for the Service-Oriented Software Engineering course
 
 sudo lsof -i :5432 - para encontrar o PID que está usando a porta
 sudo kill -9 <PID>
+
+Comando para povoar o banco
+docker cp script.sql ese-order_postgres_1:/tmp/script.sql
+docker exec -it ese-order_postgres_1 psql -U postgres -d nhslog -f /tmp/script.sql
+
+Para entrar no banco e ver as collections
+psql -U postgres
+\c nhslog

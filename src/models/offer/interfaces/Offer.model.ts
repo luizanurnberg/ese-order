@@ -1,6 +1,6 @@
 import TBaseModel from "../../Base.model";
 import TFleetVehicleModel from "../../fleet/interfaces/FleetVehicle.model";
-import TQuotationModel from "../../quotation/interfaces/Quotation.model";
+import { TQuotationModel } from "../../quotation/interfaces/Quotation.model";
 
 type TOfferModel = {
     id?: number;
