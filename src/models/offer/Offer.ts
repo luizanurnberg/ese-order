@@ -1,4 +1,11 @@
-import { Model, DataType, Table, Column, ForeignKey, BelongsTo } from "sequelize-typescript";
+import {
+    Model,
+    DataType,
+    Table,
+    Column,
+    ForeignKey,
+    BelongsTo,
+} from "sequelize-typescript";
 import Quotation from "../quotation/Quotation";
 import FleetVehicle from "../fleet/FleetVehicle";
 import TOfferModel from "../offer/interfaces/Offer.model";
@@ -58,15 +65,15 @@ class Offer extends Model<TOfferModel> {
     })
     quotationId!: number;
 
+    @BelongsTo(() => Quotation)
+    quotation?: Quotation;
+
     @ForeignKey(() => FleetVehicle)
     @Column({
         type: DataType.INTEGER,
         field: "fk_fleet_vehicle",
     })
     fleetVehicleId!: number;
-
-    @BelongsTo(() => Quotation)
-    quotation?: Quotation;
 
     @BelongsTo(() => FleetVehicle)
     fleetVehicle?: FleetVehicle;
