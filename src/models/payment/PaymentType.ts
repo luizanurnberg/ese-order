@@ -2,7 +2,7 @@ import { Model, DataType, Table, Column } from "sequelize-typescript";
 import TPaymentTypeModel from "./interfaces/PaymentType.model";
 
 @Table({
-    tableName: "Payment_Type",
+    tableName: "payment_type",
     modelName: "PaymentType",
 })
 

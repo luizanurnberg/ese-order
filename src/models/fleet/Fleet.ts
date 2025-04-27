@@ -13,7 +13,7 @@ import FleetVehicleFleet from "./FleetVehicleFleet";
 import FleetVehicle from "./FleetVehicle";
 
 @Table({
-    tableName: "Fleet",
+    tableName: "fleet",
     modelName: "Fleet",
 })
 class Fleet extends Model<TFleetModel> {

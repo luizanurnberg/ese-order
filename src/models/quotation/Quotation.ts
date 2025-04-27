@@ -13,7 +13,7 @@ import ItemRemittance from "../item-remittance/ItemRemittance";
 import Offer from "../offer/Offer";
 
 @Table({
-    tableName: "Quotation",
+    tableName: "quotation",
     modelName: "Quotation",
 })
 class Quotation extends Model<TQuotationModel> {
@@ -43,7 +43,7 @@ class Quotation extends Model<TQuotationModel> {
     @Column({
         type: DataType.DATE,
         allowNull: false,
-        field: "current_date",
+        field: "qu_current_date",
     })
     currentDate!: Date;
 

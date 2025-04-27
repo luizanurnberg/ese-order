@@ -4,7 +4,7 @@ import FleetVehicle from "../fleet/FleetVehicle";
 import TOfferModel from "../offer/interfaces/Offer.model";
 
 @Table({
-    tableName: "Offer",
+    tableName: "offer",
     modelName: "Offer",
 })
 class Offer extends Model<TOfferModel> {

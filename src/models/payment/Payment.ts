@@ -3,7 +3,7 @@ import DeliveryProcess from "../delivery/DeliveryProcess";
 import TPaymentModel from "../payment/interfaces/Payment.model";
 
 @Table({
-    tableName: "Payment",
+    tableName: "payment",
     modelName: "Payment",
 })
 class Payment extends Model<TPaymentModel> {

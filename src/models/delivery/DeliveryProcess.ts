@@ -4,7 +4,7 @@ import Feedback from "../feedback/Feedback";
 import TDeliveryProcessModel from "./interfaces/DeliveryProcess.model";
 
 @Table({
-    tableName: "Delivery_Process",
+    tableName: "delivery_process",
     modelName: "DeliveryProcess",
 })
 class DeliveryProcess extends Model<TDeliveryProcessModel> {

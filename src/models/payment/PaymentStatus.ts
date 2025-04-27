@@ -2,7 +2,7 @@ import { Model, DataType, Table, Column } from "sequelize-typescript";
 import TPaymentStatusModel from "./interfaces/PaymentStatus.model";
 
 @Table({
-    tableName: "Payment_Status",
+    tableName: "payment_status",
     modelName: "PaymentStatus",
 })
 class PaymentStatus extends Model<TPaymentStatusModel> {

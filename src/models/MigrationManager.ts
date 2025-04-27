@@ -1,7 +1,7 @@
 import { Model, DataType, Table, Column } from 'sequelize-typescript';
 
 @Table({
-    tableName: 'MigrationManager',
+    tableName: 'migrationManager',
     modelName: 'MigrationManager',
 })
 class MigrationManager extends Model {

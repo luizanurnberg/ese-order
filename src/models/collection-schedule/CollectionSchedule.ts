@@ -3,7 +3,7 @@ import Address from "../address/Address";
 import TCollectionScheduleModel from "../collection-schedule/interfaces/CollectionSchedule.model";
 
 @Table({
-    tableName: "Collection_Schedule",
+    tableName: "collection_schedule",
     modelName: "CollectionSchedule",
 })
 class CollectionSchedule extends Model<TCollectionScheduleModel> {

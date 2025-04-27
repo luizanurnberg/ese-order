@@ -2,7 +2,7 @@ import TRemittanceTypeTax from "./interface/RemittanceTypeTax.model";
 import { Model, DataType, Table, Column } from "sequelize-typescript";
 
 @Table({
-    tableName: "Remittance_Type_Tax",
+    tableName: "remittance_type_tax",
     modelName: "RemittanceTypeTax",
 })
 class RemittanceTypeTax extends Model<TRemittanceTypeTax> {

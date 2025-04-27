@@ -2,7 +2,7 @@ import { Model, DataType, Table, Column } from "sequelize-typescript";
 import TDeliveryProcessStatusModel from "./interfaces/DeliveryProcessStatus.model";
 
 @Table({
-    tableName: "Delivery_Process_Status",
+    tableName: "delivery_process_status",
     modelName: "DeliveryProcessStatus",
 })
 class DeliveryProcessStatus extends Model<TDeliveryProcessStatusModel> {

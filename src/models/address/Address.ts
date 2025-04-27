@@ -2,7 +2,7 @@ import TAddressModel from "./interfaces/Address.model";
 import { Model, DataType, Table, Column } from "sequelize-typescript";
 
 @Table({
-    tableName: "Address",
+    tableName: "address",
     modelName: "Address",
 })
 class Address extends Model<TAddressModel> {

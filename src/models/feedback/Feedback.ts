@@ -2,7 +2,7 @@ import TFeedbackModel from "./interfaces/Feedback.model";
 import { Model, DataType, Table, Column } from "sequelize-typescript";
 
 @Table({
-    tableName: "Feedback",
+    tableName: "feedback",
     modelName: "Feedback",
 })
 class Feedback extends Model<TFeedbackModel> {

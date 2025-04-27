@@ -4,7 +4,7 @@ import DeliveryProcess from "./DeliveryProcess";
 import TDeliveryAppointmentModel from "./interfaces/DeliveryAppointment.model";
 
 @Table({
-    tableName: "Delivery_Appointment",
+    tableName: "delivery_appointment",
     modelName: "DeliveryAppointment",
 })
 class DeliveryAppointment extends Model<TDeliveryAppointmentModel> {
