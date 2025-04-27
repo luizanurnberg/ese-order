@@ -2,7 +2,7 @@ import TUserModel from "./interfaces/User.model";
 import { Model, DataType, Table, Column } from "sequelize-typescript";
 
 @Table({
-    tableName: "User",
+    tableName: "user",
     modelName: "User",
 })
 class User extends Model<TUserModel> {
