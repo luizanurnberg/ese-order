@@ -1,10 +1,7 @@
 import IBaseRepository from "../base.repository";
 import { TQuotationModel } from "../../models/quotation/interfaces/Quotation.model";
 import Quotation from "../../models/quotation/Quotation";
-import Address from "../../models/address/Address";
-import ItemRemittance from "../../models/item-remittance/ItemRemittance";
 import { Op } from "sequelize";
-import Offer from "../../models/offer/Offer";
 import { z } from "zod";
 
 const TQuotationSchema = z.object({
@@ -17,84 +14,45 @@ const TQuotationSchema = z.object({
 
 class QuotationRepository implements IBaseRepository<TQuotationModel> {
     async findAll(): Promise<TQuotationModel[]> {
-        const findAllResult = await Quotation.findAll();
-        return findAllResult;
+        return await Quotation.findAll();
     }
 
     async findAllWithoutApprovedOffers(): Promise<TQuotationModel[]> {
-        const quotations = await Quotation.findAll({
-            include: [
-                {
-                    model: Offer,
-                    required: false,
-                },
-                {
-                    model: ItemRemittance,
-                    required: false,
-                    where: { quotationId: { [Op.col]: "Quotation.pk_quotation" } },
-                },
-                { model: Address, as: "originAddress", required: false },
-                { model: Address, as: "destinationAddress", required: false },
-            ],
-        });
-
-        return quotations;
+        return await Quotation.findAll();
     }
 
     async findAllByCPF({ cpf }: { cpf: string }): Promise<TQuotationModel[]> {
-        //TODO formatar a data e peso
-        const findAllResult = await Quotation.findAll({
+        return await Quotation.findAll({
             where: { cpf },
-            include: [
-                { model: Address, as: "originAddress", required: false },
-                { model: Address, as: "destinationAddress", required: false },
-                {
-                    model: ItemRemittance,
-                    required: false,
-                    where: {
-                        quotationId: {
-                            [Op.col]: "Quotation.pk_quotation",
-                        },
-                    },
-                },
-            ],
         });
-        return findAllResult;
     }
 
     async findOne({ id }: { id: string }): Promise<TQuotationModel | null> {
-        const findOneResult = await Quotation.findOne({ where: { id } });
-        return findOneResult;
+        return await Quotation.findOne({ where: { id } });
     }
 
     async delete({ id }: { id: string }): Promise<boolean> {
         const deletedRows = await Quotation.destroy({ where: { id } });
-
-        if (deletedRows > 0) return true;
-        return false;
+        return deletedRows > 0;
     }
 
     async create({ data }: { data: any }): Promise<TQuotationModel> {
         await this.validateInput(data);
-
-        const createResult = await Quotation.create(data);
-        return createResult;
+        return await Quotation.create(data);
     }
 
     async update({ data }: { data: TQuotationModel }): Promise<TQuotationModel | null> {
         const [affectedRows] = await Quotation.update(data, { where: { id: data.id } });
-        if (affectedRows > 0) return data;
-        return null;
+        return affectedRows > 0 ? data : null;
     }
 
-    async validateInput(data: TQuotationModel) {
+    private async validateInput(data: TQuotationModel) {
         try {
             await TQuotationSchema.parseAsync(data);
         } catch (error) {
             throw new Error("Erro. Os campos obrigatórios devem ser preenchidos corretamente!");
         }
     }
-
 }
 
 export default new QuotationRepository();

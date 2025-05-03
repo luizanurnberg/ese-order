@@ -1,9 +1,5 @@
-import TAddressModel from "../../models/address/interfaces/Address.model";
 import { TCreateQuotationWithAddresses, TQuotationModel } from "../../models/quotation/interfaces/Quotation.model";
-import Address from "../../models/address/Address";
 import Quotation from "../../models/quotation/Quotation";
-import TItemRemittanceModel from "../../models/item-remittance/interface/ItemRemittance.model";
-import ItemRemittance from "../../models/item-remittance/ItemRemittance";
 import quotationRepository from "../../repositories/quotation/quotation.repository";
 
 class QuotationService {
@@ -14,22 +10,22 @@ class QuotationService {
         itemRemittance,
     }: TCreateQuotationWithAddresses) {
         try {
-            const databaseOriginAddress = await Address.create(originAddress);
+            // const databaseOriginAddress = await Address.create(originAddress);
 
-            const databaseDestinationAddress = await Address.create(destinationAddress);
+            // const databaseDestinationAddress = await Address.create(destinationAddress);
 
-            const databaseQuotation = await Quotation.create({
-                ...quotation,
-                originAddressId: databaseOriginAddress.id,
-                destinationAddressId: databaseDestinationAddress.id,
-            });
+            // const databaseQuotation = await Quotation.create({
+            //     ...quotation,
+            //     originAddressId: databaseOriginAddress.id,
+            //     destinationAddressId: databaseDestinationAddress.id,
+            // });
 
-            await ItemRemittance.create({
-                ...itemRemittance,
-                quotationId: databaseQuotation.id,
-            });
+            // await ItemRemittance.create({
+            //     ...itemRemittance,
+            //     quotationId: databaseQuotation.id,
+            // });
 
-            return databaseQuotation;
+            // return databaseQuotation;
         } catch (error) {
             throw error;
         }

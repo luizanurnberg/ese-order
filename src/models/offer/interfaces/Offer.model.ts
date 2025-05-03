@@ -1,5 +1,4 @@
 import TBaseModel from "../../Base.model";
-import TFleetVehicleModel from "../../fleet/interfaces/FleetVehicle.model";
 import { TQuotationModel } from "../../quotation/interfaces/Quotation.model";
 
 type TOfferModel = {
@@ -11,7 +10,7 @@ type TOfferModel = {
     deliveryForecast: Date;
 
     fleetVehicleId: number;
-    fleetVehicle?: TFleetVehicleModel;
+    fleetVehicle?: any;
 
     quotationId: number;
     quotation?: TQuotationModel;

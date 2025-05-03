@@ -1,17 +1,8 @@
-import {
-    Model,
-    DataType,
-    Table,
-    Column,
-    ForeignKey,
-    BelongsTo,
-} from "sequelize-typescript";
-import Quotation from "../quotation/Quotation";
-import FleetVehicle from "../fleet/FleetVehicle";
+import { Model, DataType, Table, Column } from "sequelize-typescript";
 import TOfferModel from "../offer/interfaces/Offer.model";
 
 @Table({
-    tableName: "offer",
+    tableName: "Offer",
     modelName: "Offer",
 })
 class Offer extends Model<TOfferModel> {
@@ -58,25 +49,17 @@ class Offer extends Model<TOfferModel> {
     })
     deliveryForecast!: Date;
 
-    @ForeignKey(() => Quotation)
     @Column({
         type: DataType.INTEGER,
         field: "fk_quotation",
     })
     quotationId!: number;
 
-    @BelongsTo(() => Quotation)
-    quotation?: Quotation;
-
-    @ForeignKey(() => FleetVehicle)
     @Column({
         type: DataType.INTEGER,
         field: "fk_fleet_vehicle",
     })
     fleetVehicleId!: number;
-
-    @BelongsTo(() => FleetVehicle)
-    fleetVehicle?: FleetVehicle;
 
     @Column({
         type: DataType.DATE,

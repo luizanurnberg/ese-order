@@ -1,34 +1,25 @@
 import IBaseRepository from "../base.repository";
 import TOfferModel from "../../models/offer/interfaces/Offer.model";
 import Offer from "../../models/offer/Offer";
-import Quotation from "../../models/quotation/Quotation";
 
 class OfferRepository implements IBaseRepository<TOfferModel> {
     async findAll(): Promise<TOfferModel[]> {
-        const findAllResult = await Offer.findAll();
-        return findAllResult;
+        return await Offer.findAll();
     }
 
     async findOne({ id }: { id: string }): Promise<TOfferModel | null> {
-        const findOneResult = await Offer.findOne({
+        return await Offer.findOne({
             where: { id },
-            include: {
-                model: Quotation,
-            },
         });
-        return findOneResult;
     }
 
     async delete({ id }: { id: string }): Promise<boolean> {
         const deletedRows = await Offer.destroy({ where: { id } });
-
-        if (deletedRows > 0) return true;
-        return false;
+        return deletedRows > 0;
     }
 
     async create({ data }: { data: TOfferModel }): Promise<TOfferModel> {
-        const createResult = await Offer.create(data);
-        return createResult;
+        return await Offer.create(data);
     }
 
     async update({ data }: { data: TOfferModel }): Promise<TOfferModel | null> {
@@ -39,15 +30,13 @@ class OfferRepository implements IBaseRepository<TOfferModel> {
             },
         });
 
-        if (affectedRows > 0) return data;
-        return null;
+        return affectedRows > 0 ? data : null;
     }
 
     async findAllByQuotation(quotationId: any): Promise<TOfferModel[]> {
-        const offersByQuotation = await Offer.findAll({
+        return await Offer.findAll({
             where: { quotationId: Number(quotationId) },
         });
-        return offersByQuotation;
     }
 }
 

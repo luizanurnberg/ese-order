@@ -1,6 +1,4 @@
-import TAddressModel from "../../address/interfaces/Address.model";
 import TBaseModel from "../../Base.model";
-import TItemRemittanceModel from "../../item-remittance/interface/ItemRemittance.model";
 import TOfferModel from "../../offer/interfaces/Offer.model";
 
 export type TQuotationModel = {
@@ -10,15 +8,15 @@ export type TQuotationModel = {
     currentDate: Date;
     originAddressId?: number;
     destinationAddressId?: number;
-    originAddress?: TAddressModel;
-    destinationAddress?: TAddressModel;
-    itemRemittances?: TItemRemittanceModel[];
+    originAddress?: any;
+    destinationAddress?: any;
+    itemRemittances?: any[];
     offers?: TOfferModel[];
 } & TBaseModel;
 
 export type TCreateQuotationWithAddresses = {
     quotation: TQuotationModel;
-    destinationAddress: TAddressModel;
-    originAddress: TAddressModel;
-    itemRemittance: TItemRemittanceModel;
+    destinationAddress: any;
+    originAddress: any;
+    itemRemittance: any;
 };

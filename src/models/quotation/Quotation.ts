@@ -1,16 +1,4 @@
-import {
-    Model,
-    DataType,
-    Table,
-    Column,
-    ForeignKey,
-    BelongsTo,
-    HasMany,
-} from "sequelize-typescript";
-
-import Address from "../address/Address";
-import ItemRemittance from "../item-remittance/ItemRemittance";
-import Offer from "../offer/Offer";
+import { Model, DataType, Table, Column } from "sequelize-typescript";
 import { TQuotationModel } from "../quotation/interfaces/Quotation.model";
 
 @Table({
@@ -48,32 +36,17 @@ class Quotation extends Model<TQuotationModel> {
     })
     currentDate!: Date;
 
-    @ForeignKey(() => Address)
     @Column({
         type: DataType.INTEGER,
         field: "fk_origin_address",
     })
     originAddressId!: number;
 
-    @ForeignKey(() => Address)
     @Column({
         type: DataType.INTEGER,
         field: "fk_destination_address",
     })
     destinationAddressId!: number;
-
-    @BelongsTo(() => Address, "fk_origin_address")
-    originAddress?: Address;
-
-    @BelongsTo(() => Address, "fk_destination_address")
-    destinationAddress?: Address;
-
-    @HasMany(() => Offer)
-    offers?: Offer[];
-
-    // Se houver relacionamento com ItemRemittance no futuro, descomente:
-    // @HasMany(() => ItemRemittance)
-    // itemRemittances?: ItemRemittance[];
 
     @Column({
         type: DataType.DATE,
