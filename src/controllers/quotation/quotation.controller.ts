@@ -4,19 +4,6 @@ import quotationRepository from "../../repositories/quotation/quotation.reposito
 import { TCreateQuotationWithAddresses } from "../../models/quotation/interfaces/Quotation.model";
 
 async function createWithAddresses(req: Request<{}, {}, TCreateQuotationWithAddresses>, res: Response): Promise<void> {
-    /*
-    // Verificar token
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
-    if (!token) {
-        res.status(401).send("Token não fornecido");
-        return;
-    }
-    const isValidToken = await verifyToken(token);
-    if (!isValidToken) {
-        res.status(403).send("Token inválido");
-        return;
-    }
-    */
     try {
         const requestBody = req.body;
         const result = await quotationService.createQuotationWithAddressesUsecase(requestBody);
@@ -28,23 +15,7 @@ async function createWithAddresses(req: Request<{}, {}, TCreateQuotationWithAddr
 }
 
 async function findAll(req: Request, res: Response): Promise<void> {
-    /*
-    // Verificar token
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
-    if (!token) {
-        res.status(401).send("Token não fornecido");
-        return;
-    }
-    const isValidToken = await verifyToken(token);
-    if (!isValidToken) {
-        res.status(403).send("Token inválido");
-        return;
-    }
-    */
     try {
-        const result = await fetch("http://ese-payment:3000/api/payment/");
-        const data = await result.json();
-        console.log(data)
         const findAllResult = await quotationService.findAll();
         res.status(200).send(findAllResult);
     } catch (error) {
@@ -54,19 +25,6 @@ async function findAll(req: Request, res: Response): Promise<void> {
 }
 
 async function findAllWithoutApprovedOffers(req: Request, res: Response): Promise<void> {
-    /*
-    // Verificar token
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
-    if (!token) {
-        res.status(401).send("Token não fornecido");
-        return;
-    }
-    const isValidToken = await verifyToken(token);
-    if (!isValidToken) {
-        res.status(403).send("Token inválido");
-        return;
-    }
-    */
     try {
         const findAllResult = await quotationService.findAllWithoutApprovedOffers();
         res.status(200).send(findAllResult);
@@ -77,19 +35,6 @@ async function findAllWithoutApprovedOffers(req: Request, res: Response): Promis
 }
 
 async function findAllByCPF(req: Request, res: Response): Promise<void> {
-    /*
-    // Verificar token
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
-    if (!token) {
-        res.status(401).send("Token não fornecido");
-        return;
-    }
-    const isValidToken = await verifyToken(token);
-    if (!isValidToken) {
-        res.status(403).send("Token inválido");
-        return;
-    }
-    */
     try {
         const idToFind = req.params.cpf;
         const findAllResult = await quotationService.findAllByCPF(idToFind);
@@ -105,19 +50,6 @@ async function findAllByCPF(req: Request, res: Response): Promise<void> {
 }
 
 async function findOne(req: Request, res: Response): Promise<void> {
-    /*
-    // Verificar token
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
-    if (!token) {
-        res.status(401).send("Token não fornecido");
-        return;
-    }
-    const isValidToken = await verifyToken(token);
-    if (!isValidToken) {
-        res.status(403).send("Token inválido");
-        return;
-    }
-    */
     const idToFind = req.params.id;
     try {
         const findOneResult = await quotationService.findOne(idToFind);
@@ -129,19 +61,6 @@ async function findOne(req: Request, res: Response): Promise<void> {
 }
 
 async function create(req: Request, res: Response): Promise<void> {
-    /*
-    // Verificar token
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
-    if (!token) {
-        res.status(401).send("Token não fornecido");
-        return;
-    }
-    const isValidToken = await verifyToken(token);
-    if (!isValidToken) {
-        res.status(403).send("Token inválido");
-        return;
-    }
-    */
     try {
         const body = req.body;
         const createResult = await quotationService.create(body);
@@ -153,19 +72,6 @@ async function create(req: Request, res: Response): Promise<void> {
 }
 
 async function update(req: Request, res: Response): Promise<void> {
-    /*
-    // Verificar token
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
-    if (!token) {
-        res.status(401).send("Token não fornecido");
-        return;
-    }
-    const isValidToken = await verifyToken(token);
-    if (!isValidToken) {
-        res.status(403).send("Token inválido");
-        return;
-    }
-    */
     try {
         const body = req.body;
         const updateReturn = await quotationService.update(body);
@@ -177,19 +83,6 @@ async function update(req: Request, res: Response): Promise<void> {
 }
 
 async function deleteOne(req: Request, res: Response): Promise<void> {
-    /*
-    // Verificar token
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
-    if (!token) {
-        res.status(401).send("Token não fornecido");
-        return;
-    }
-    const isValidToken = await verifyToken(token);
-    if (!isValidToken) {
-        res.status(403).send("Token inválido");
-        return;
-    }
-    */
     try {
         const idToFind = req.params.id;
         const deleteReturn = await quotationService.deleteOne(idToFind);

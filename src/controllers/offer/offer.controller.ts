@@ -2,19 +2,6 @@ import { Request, Response } from "express";
 import offerService from "../../services/offer/offer.service";
 
 async function findAll(req: Request, res: Response): Promise<void> {
-    /*
-    // Verificar token
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
-    if (!token) {
-        res.status(401).send("Token não fornecido");
-        return;
-    }
-    const isValidToken = await verifyToken(token);
-    if (!isValidToken) {
-        res.status(403).send("Token inválido");
-        return;
-    }
-    */
     try {
         const findAllResult = await offerService.findAll();
         res.status(200).send(findAllResult);
@@ -25,19 +12,6 @@ async function findAll(req: Request, res: Response): Promise<void> {
 }
 
 async function findOne(req: Request, res: Response): Promise<void> {
-    /*
-    // Verificar token
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
-    if (!token) {
-        res.status(401).send("Token não fornecido");
-        return;
-    }
-    const isValidToken = await verifyToken(token);
-    if (!isValidToken) {
-        res.status(403).send("Token inválido");
-        return;
-    }
-    */
     const idToFind = req.params.id;
     try {
         const findOneResult = await offerService.findOne(idToFind);
@@ -49,19 +23,6 @@ async function findOne(req: Request, res: Response): Promise<void> {
 }
 
 async function findOfferByQuotationId(req: Request, res: Response): Promise<void> {
-    /*
-    // Verificar token
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
-    if (!token) {
-        res.status(401).send("Token não fornecido");
-        return;
-    }
-    const isValidToken = await verifyToken(token);
-    if (!isValidToken) {
-        res.status(403).send("Token inválido");
-        return;
-    }
-    */
     const idToFind = req.params.id;
     try {
         const foundOffers = await offerService.findOfferByQuotationId(idToFind);
@@ -73,19 +34,7 @@ async function findOfferByQuotationId(req: Request, res: Response): Promise<void
 }
 
 async function create(req: Request, res: Response): Promise<void> {
-        /*
-    // Verificar token
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
-    if (!token) {
-        res.status(401).send("Token não fornecido");
-        return;
-    }
-    const isValidToken = await verifyToken(token);
-    if (!isValidToken) {
-        res.status(403).send("Token inválido");
-        return;
-    }
-    */
+
     try {
         const body = req.body;
         const createResult = await offerService.create(body);
@@ -97,19 +46,6 @@ async function create(req: Request, res: Response): Promise<void> {
 }
 
 async function approveOffer(req: Request, res: Response): Promise<void> {
-    /*
-    // Verificar token
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
-    if (!token) {
-        res.status(401).send("Token não fornecido");
-        return;
-    }
-    const isValidToken = await verifyToken(token);
-    if (!isValidToken) {
-        res.status(403).send("Token inválido");
-        return;
-    }
-    */
     try {
         const body = req.body;
         const createResult = await offerService.approveOfferUsecase(body.offer);
@@ -121,19 +57,6 @@ async function approveOffer(req: Request, res: Response): Promise<void> {
 }
 
 async function update(req: Request, res: Response): Promise<void> {
-    /*
-    // Verificar token
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
-    if (!token) {
-        res.status(401).send("Token não fornecido");
-        return;
-    }
-    const isValidToken = await verifyToken(token);
-    if (!isValidToken) {
-        res.status(403).send("Token inválido");
-        return;
-    }
-    */
     try {
         const body = req.body;
         const updateReturn = await offerService.update(body);
@@ -145,19 +68,6 @@ async function update(req: Request, res: Response): Promise<void> {
 }
 
 async function deleteOne(req: Request, res: Response): Promise<void> {
-    /*
-    // Verificar token
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
-    if (!token) {
-        res.status(401).send("Token não fornecido");
-        return;
-    }
-    const isValidToken = await verifyToken(token);
-    if (!isValidToken) {
-        res.status(403).send("Token inválido");
-        return;
-    }
-    */
     try {
         const idToFind = req.params.id;
         const deleteReturn = await offerService.deleteOne(idToFind);
