@@ -6,7 +6,12 @@ import { TCreateQuotationWithAddresses } from "../../models/quotation/interfaces
 async function createWithAddresses(req: Request<{}, {}, TCreateQuotationWithAddresses>, res: Response): Promise<void> {
     try {
         const requestBody = req.body;
-        const result = await quotationService.createQuotationWithAddressesUsecase(requestBody);
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return;
+        }
+        const token = authHeader.split(" ")[1];
+        const result = await quotationService.createQuotationWithAddressesUsecase(requestBody, token);
         res.status(201).send(result);
     } catch (ex) {
         console.log({ ex });

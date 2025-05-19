@@ -1,6 +1,8 @@
+import { addressMiddleware } from "../../middleware/tracking.middleware";
 import { TCreateQuotationWithAddresses, TQuotationModel } from "../../models/quotation/interfaces/Quotation.model";
 import Quotation from "../../models/quotation/Quotation";
 import quotationRepository from "../../repositories/quotation/quotation.repository";
+import itemService from "../item/item.service";
 
 class QuotationService {
     async createQuotationWithAddressesUsecase({
@@ -8,24 +10,19 @@ class QuotationService {
         destinationAddress,
         originAddress,
         itemRemittance,
-    }: TCreateQuotationWithAddresses) {
+    }: TCreateQuotationWithAddresses, token: any) {
         try {
-            // const databaseOriginAddress = await Address.create(originAddress);
+            const databaseOriginAddress: any = await addressMiddleware(originAddress, token)
+            const databaseDestinationAddress: any = await addressMiddleware(destinationAddress, token);
 
-            // const databaseDestinationAddress = await Address.create(destinationAddress);
+            const databaseQuotation = await Quotation.create({
+                ...quotation,
+                originAddressId: databaseOriginAddress.id,
+                destinationAddressId: databaseDestinationAddress.id,
+            });
 
-            // const databaseQuotation = await Quotation.create({
-            //     ...quotation,
-            //     originAddressId: databaseOriginAddress.id,
-            //     destinationAddressId: databaseDestinationAddress.id,
-            // });
-
-            // await ItemRemittance.create({
-            //     ...itemRemittance,
-            //     quotationId: databaseQuotation.id,
-            // });
-
-            // return databaseQuotation;
+            await itemService.create({ ...itemRemittance, quotationId: databaseQuotation.id })
+            return databaseQuotation;
         } catch (error) {
             throw error;
         }
