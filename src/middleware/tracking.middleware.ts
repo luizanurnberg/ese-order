@@ -1,15 +1,11 @@
 
 export async function addressMiddleware(address: any, token: string) {
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-    };
-
     try {
-        const response = await fetch("http://ese-tracking:3000/address", {
+        const response = await fetch("http://api-gateway:8080/address", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify(address)
         });
