@@ -14,6 +14,7 @@ type TOfferModel = {
 
     quotationId: number;
     quotation?: TQuotationModel;
+    paymentType?: string;
 } & TBaseModel;
 
 export default TOfferModel;

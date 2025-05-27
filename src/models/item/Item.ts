@@ -3,7 +3,7 @@ import TItemRemittanceModel from "../item/interfaces/Item.model";
 import Quotation from "../quotation/Quotation";
 
 @Table({
-    tableName: "Item_Remittance",
+    tableName: "item_remittance",
     modelName: "ItemRemittance",
 })
 class ItemRemittance extends Model<TItemRemittanceModel> {

@@ -14,13 +14,11 @@ class QuotationService {
         try {
             const databaseOriginAddress: any = await addressMiddleware(originAddress, token)
             const databaseDestinationAddress: any = await addressMiddleware(destinationAddress, token);
-
             const databaseQuotation = await Quotation.create({
                 ...quotation,
-                originAddressId: databaseOriginAddress.id,
-                destinationAddressId: databaseDestinationAddress.id,
+                originAddressId: databaseOriginAddress.address.id,
+                destinationAddressId: databaseDestinationAddress.address.id,
             });
-
             await itemService.create({ ...itemRemittance, quotationId: databaseQuotation.id })
             return databaseQuotation;
         } catch (error) {

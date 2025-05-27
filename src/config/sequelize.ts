@@ -2,11 +2,13 @@ import * as dotenv from "dotenv";
 import { Sequelize } from "sequelize-typescript";
 import Offer from "../models/offer/Offer";
 import Quotation from "../models/quotation/Quotation";
+import ItemRemittance from "../models/item/Item";
 
 dotenv.config();
 const DATABASE_MODELS = [
     Offer,
     Quotation,
+    ItemRemittance
 ];
 class SequelizeAdapter {
     public instance: Sequelize | undefined;

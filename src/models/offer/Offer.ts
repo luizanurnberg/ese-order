@@ -2,7 +2,7 @@ import { Model, DataType, Table, Column } from "sequelize-typescript";
 import TOfferModel from "../offer/interfaces/Offer.model";
 
 @Table({
-    tableName: "Offer",
+    tableName: "offer",
     modelName: "Offer",
 })
 class Offer extends Model<TOfferModel> {
