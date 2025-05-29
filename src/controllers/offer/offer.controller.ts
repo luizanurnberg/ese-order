@@ -48,7 +48,12 @@ async function create(req: Request, res: Response): Promise<void> {
 async function approveOffer(req: Request, res: Response): Promise<void> {
     try {
         const body = req.body;
-        const createResult = await offerService.approveOfferUsecase(body.offer);
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return;
+        }
+        const token = authHeader.split(" ")[1];
+        const createResult = await offerService.approveOfferUsecase(body.offer, token);
         res.status(200).send(createResult);
     } catch (error) {
         console.log({ error });

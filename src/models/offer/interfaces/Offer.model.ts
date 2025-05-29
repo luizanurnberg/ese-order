@@ -9,8 +9,8 @@ type TOfferModel = {
     total: number;
     deliveryForecast: Date;
 
-    fleetVehicleId: number;
-    fleetVehicle?: any;
+    fleetVehicleId?: number;
+    fleetId?: any;
 
     quotationId: number;
     quotation?: TQuotationModel;

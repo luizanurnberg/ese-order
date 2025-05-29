@@ -25,7 +25,7 @@ export async function addressMiddleware(address: any, token: string) {
     }
 }
 
-export async function deliveryProcessMiddleware(address: any, token: string) {
+export async function deliveryProcessMiddleware(process: any, token: string) {
     try {
         const response = await fetch("http://api-gateway:8080/delivery", {
             method: "POST",
@@ -33,7 +33,7 @@ export async function deliveryProcessMiddleware(address: any, token: string) {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             },
-            body: JSON.stringify(address)
+            body: JSON.stringify(process)
         });
 
         if (!response.ok) {
@@ -43,7 +43,7 @@ export async function deliveryProcessMiddleware(address: any, token: string) {
         const data = await response.json();
 
         return {
-            address: data,
+            process: data,
         };
     } catch (err) {
         console.error('Erro no deliveryProcessMiddleware:', err);

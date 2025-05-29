@@ -1,6 +1,7 @@
 import OfferRepository from "../../repositories/offer/offer.repository";
-import Offer from "../../models/offer/Offer";
 import { OFFER_STATUS } from "../../models/offer/interfaces/enum";
+import { deliveryProcessMiddleware } from "../../middleware/tracking.middleware";
+import TOfferModel from "../../models/offer/interfaces/Offer.model";
 
 class OfferService {
     async findAll() {
@@ -15,28 +16,29 @@ class OfferService {
         return OfferRepository.findAllByQuotation(quotationId);
     }
 
-    async create(data: any) {
+    async create(data: TOfferModel) {
         return OfferRepository.create({ data });
     }
 
-    async approveOfferUsecase(offer: Offer) {
+    async approveOfferUsecase(offer: TOfferModel, token: string) {
         try {
-            const updatedOffer = await OfferRepository.update({
-                data: { ...offer, status: OFFER_STATUS.APPROVED },
+            const updatedOffer = await OfferRepository.updateOfferStatus({
+                data: {
+                    id: offer.id ? offer.id : 0,
+                    status: OFFER_STATUS.APPROVED
+                }
             });
-    
-            if (!(updatedOffer?.status == OFFER_STATUS.APPROVED)) throw Error("erro");
-    
-            // TO DO: integrar com o microsserviço do schork
-            // const deliveryProcess = await deliveryProcessRepository.create({
-            //     data: {
-            //         offerId: offer.id,
-            //         createdBy: "",
-            //         createdAt: new Date(),
-            //         status: DELIVERY_PROCESS_STATUS.CREATED,
-            //     },
-            // });
-    
+
+            const delivery = {
+                fleetId: offer.fleetId,
+                fleetVehicleId: offer.fleetId,
+                statusId: 2,
+                startedAt: new Date(),
+                endedAt: null
+            }
+
+            const deliveryProcess: any = await deliveryProcessMiddleware(delivery, token);
+            console.log(deliveryProcess)
             return {
                 offerId: offer.id,
                 deliveryProcessId: null,
@@ -46,7 +48,7 @@ class OfferService {
         }
     }
 
-    async update(data: any) {
+    async update(data: TOfferModel) {
         return OfferRepository.update({ data });
     }
 
