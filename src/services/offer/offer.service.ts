@@ -22,7 +22,7 @@ class OfferService {
 
     async approveOfferUsecase(offer: TOfferModel, token: string) {
         try {
-            const updatedOffer = await OfferRepository.updateOfferStatus({
+            await OfferRepository.updateOfferStatus({
                 data: {
                     id: offer.id ? offer.id : 0,
                     status: OFFER_STATUS.APPROVED
@@ -32,16 +32,15 @@ class OfferService {
             const delivery = {
                 fleetId: offer.fleetId,
                 fleetVehicleId: offer.fleetId,
-                statusId: 2,
+                statusId: "c7097e4e-2077-4b2b-9c2d-74b1c4aa14bb",
                 startedAt: new Date(),
                 endedAt: null
             }
 
             const deliveryProcess: any = await deliveryProcessMiddleware(delivery, token);
-            console.log(deliveryProcess)
             return {
                 offerId: offer.id,
-                deliveryProcessId: null,
+                deliveryProcessId: deliveryProcess.process.id,
             };
         } catch (error) {
             throw error;
