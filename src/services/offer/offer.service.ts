@@ -2,6 +2,8 @@ import OfferRepository from "../../repositories/offer/offer.repository";
 import { OFFER_STATUS } from "../../models/offer/interfaces/enum";
 import { deliveryProcessMiddleware } from "../../middleware/tracking.middleware";
 import TOfferModel from "../../models/offer/interfaces/Offer.model";
+import { paymentMiddlware } from "../../middleware/payment.middleware";
+import QuotationService from "../quotation/quotation.service";
 
 class OfferService {
     async findAll() {
@@ -38,6 +40,15 @@ class OfferService {
             }
 
             const deliveryProcess: any = await deliveryProcessMiddleware(delivery, token);
+            const quotation: any = await QuotationService.findOne(offer.quotationId.toString());
+            
+            const payment = {
+                paymentType: offer.paymentType,
+                deliveryProcessId: deliveryProcess.process.id,
+                quotationEmail: quotation.email
+            }
+            await paymentMiddlware(payment, token);
+
             return {
                 offerId: offer.id,
                 deliveryProcessId: deliveryProcess.process.id,
