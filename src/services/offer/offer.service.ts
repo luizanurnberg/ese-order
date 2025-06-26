@@ -1,8 +1,8 @@
-import OfferRepository from "../../repositories/offer/offer.repository";
-import { OFFER_STATUS } from "../../models/offer/interfaces/enum";
-import { deliveryProcessMiddleware } from "../../middleware/tracking.middleware";
-import TOfferModel from "../../models/offer/interfaces/Offer.model";
 import { paymentMiddlware } from "../../middleware/payment.middleware";
+import { deliveryProcessMiddleware } from "../../middleware/tracking.middleware";
+import { OFFER_STATUS } from "../../models/offer/interfaces/enum";
+import TOfferModel from "../../models/offer/interfaces/Offer.model";
+import OfferRepository from "../../repositories/offer/offer.repository";
 import QuotationService from "../quotation/quotation.service";
 
 class OfferService {
@@ -27,26 +27,29 @@ class OfferService {
             await OfferRepository.updateOfferStatus({
                 data: {
                     id: offer.id ? offer.id : 0,
-                    status: OFFER_STATUS.APPROVED
-                }
+                    status: OFFER_STATUS.APPROVED,
+                },
             });
 
             const delivery = {
                 fleetId: offer.fleetId,
-                fleetVehicleId: offer.fleetId,
-                statusId: "c7097e4e-2077-4b2b-9c2d-74b1c4aa14bb",
+                fleetVehicleId: offer.fleetVehicleId,
+                // On tracking service the new status id to `Created` is `1`
+                // TODO create a separated const to handle delivery process status id
+                statusId: 1,
                 startedAt: new Date(),
-                endedAt: null
-            }
+                endedAt: null,
+            };
 
             const deliveryProcess: any = await deliveryProcessMiddleware(delivery, token);
             const quotation: any = await QuotationService.findOne(offer.quotationId.toString());
-            
+
             const payment = {
                 paymentType: offer.paymentType,
                 deliveryProcessId: deliveryProcess.process.id,
-                quotationEmail: quotation.email
-            }
+                quotationEmail: quotation.email,
+            };
+
             await paymentMiddlware(payment, token);
 
             return {
