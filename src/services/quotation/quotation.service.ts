@@ -1,25 +1,34 @@
 import { addressMiddleware } from "../../middleware/tracking.middleware";
-import { TCreateQuotationWithAddresses, TQuotationModel } from "../../models/quotation/interfaces/Quotation.model";
+import {
+    TCreateQuotationWithAddresses,
+    TQuotationModel,
+} from "../../models/quotation/interfaces/Quotation.model";
 import Quotation from "../../models/quotation/Quotation";
 import quotationRepository from "../../repositories/quotation/quotation.repository";
 import itemService from "../item/item.service";
 
 class QuotationService {
-    async createQuotationWithAddressesUsecase({
-        quotation,
-        destinationAddress,
-        originAddress,
-        itemRemittance,
-    }: TCreateQuotationWithAddresses, token: any) {
+    async createQuotationWithAddressesUsecase(
+        {
+            quotation,
+            destinationAddress,
+            originAddress,
+            itemRemittance,
+        }: TCreateQuotationWithAddresses,
+        token: any
+    ) {
         try {
-            const databaseOriginAddress: any = await addressMiddleware(originAddress, token)
-            const databaseDestinationAddress: any = await addressMiddleware(destinationAddress, token);
+            const databaseOriginAddress: any = await addressMiddleware(originAddress, token);
+            const databaseDestinationAddress: any = await addressMiddleware(
+                destinationAddress,
+                token
+            );
             const databaseQuotation = await Quotation.create({
                 ...quotation,
                 originAddressId: databaseOriginAddress.address.id,
                 destinationAddressId: databaseDestinationAddress.address.id,
             });
-            await itemService.create({ ...itemRemittance, quotationId: databaseQuotation.id })
+            await itemService.create({ ...itemRemittance, quotationId: databaseQuotation.id });
             return databaseQuotation;
         } catch (error) {
             throw error;
@@ -54,4 +63,4 @@ class QuotationService {
         return quotationRepository.delete({ id: id });
     }
 }
-export default new QuotationService;
+export default new QuotationService();

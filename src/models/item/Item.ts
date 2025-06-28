@@ -1,4 +1,4 @@
-import { Model, DataType, Table, Column, ForeignKey, BelongsTo } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
 import TItemRemittanceModel from "../item/interfaces/Item.model";
 import Quotation from "../quotation/Quotation";
 

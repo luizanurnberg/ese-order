@@ -34,7 +34,6 @@ async function findOfferByQuotationId(req: Request, res: Response): Promise<void
 }
 
 async function create(req: Request, res: Response): Promise<void> {
-
     try {
         const body = req.body;
         const createResult = await offerService.create(body);
