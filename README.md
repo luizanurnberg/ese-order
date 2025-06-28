@@ -1,26 +1,50 @@
 # ese-order
-Repository for the Service-Oriented Software Engineering course
 
-## Comandos Docker úteis
+Microservice responsible for managing **quotations**, **offers**, and **customer interactions** within the NHS Log platform. This service is part of a broader service-oriented architecture built with Node.js and Docker.
 
-| Comando                     | O que faz                                                   |
-|----------------------------|-------------------------------------------------------------|
-| `docker-compose up`        | Sobe os containers (sem rebuild).                          |
-| `docker-compose up -d`     | Sobe os containers em segundo plano.                       |
-| `docker-compose down`      | Derruba os containers e a rede criada.                     |
-| `docker-compose down -v`   | Derruba containers e apaga volumes (⚠️ dados somem!).       |
-| `docker-compose build`     | Só faz o rebuild das imagens, sem subir.                   |
-| `docker-compose ps`        | Mostra o status dos containers da sua stack.               |
-| `docker-compose logs -f`   | Acompanha os logs de todos os serviços em tempo real.      |
+## 📦 Description
 
+The `ese-order` service handles critical business processes such as:
 
-sudo lsof -i :5432 - para encontrar o PID que está usando a porta
-sudo kill -9 <PID>
+- Quotation requests
+- Offer creation and validation
+- Scheduling pickups
+- Customer acceptance of offers
+- Retrieving existing quotations
 
-Comando para povoar o banco
-docker cp script.sql ese-order_postgres_1:/tmp/script.sql
-docker exec -it ese-order_postgres_1 psql -U postgres -d nhslog -f /tmp/script.sql
+It plays a central role in the logistics workflow, acting as the bridge between customer inputs and internal processing handled by other services.
 
-Para entrar no banco e ver as collections
-psql -U postgres
-\c nhslog
+---
+
+## 🧩 Functional Requirements
+
+This service implements the following system-level requirements:
+
+| Requirement ID | Description |
+|----------------|-------------|
+| RF003          | Request transport quotation |
+| RF004          | Define the type of material to be transported |
+| RF006          | Admin creates offers |
+| RF007          | Customer accepts an offer |
+| RF008          | Schedule collection |
+| RF014          | Admin views existing quotations |
+
+---
+
+## ⚙️ Technologies
+
+- **Node.js** (TypeScript)
+- **Express.js** for HTTP routing
+- **PostgreSQL** with Sequelize ORM
+- REST communication
+- Docker & Docker Compose
+
+---
+
+## 🐳 Docker Setup
+
+The `ese-order` service is containerized and defined in the main `docker-compose.yml` as `ese-order`. It includes:
+
+- A dedicated PostgreSQL database instance named `postgres-order`, running on port `5433`.
+- Environment variables for database connection and service configuration.
+- Dependency declaration to ensure the database starts before the service.
